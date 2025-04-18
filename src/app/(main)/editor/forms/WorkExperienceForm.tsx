@@ -35,6 +35,7 @@ import { useEffect } from "react";
 import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import GenerateWorkExperienceButton from "./GenerateWorkExperienceButton";
 
 
 export default function WorkExperienceForm({
@@ -70,7 +71,7 @@ export default function WorkExperienceForm({
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   function handleDragEnd(event: DragEndEvent) {
@@ -177,6 +178,13 @@ export default function WorkExperienceForm({
           {...listeners}          
           />
         </div>
+        <div className="flex justify-center">
+        <GenerateWorkExperienceButton
+          onWorkExperienceGenerated={(exp) =>
+            form.setValue(`workExperiences.${index}`, exp)
+          }
+        />
+      </div>        
         <FormField
           control={form.control}
           name={`workExperiences.${index}.position`}
